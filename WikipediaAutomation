@@ -1,0 +1,48 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class WikipediaAutomation {
+
+    public static void main(String[] args) {
+       
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");  
+
+      
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        try {
+           
+            driver.get("https://www.wikipedia.org/");
+
+            
+            WebElement searchBox = driver.findElement(By.name("search"));
+            searchBox.sendKeys("Artificial Intelligence");
+            searchBox.submit();  
+           
+            Thread.sleep(2000); 
+
+            
+            WebElement historyLink = driver.findElement(By.linkText("History"));
+            historyLink.click();
+
+           
+            Thread.sleep(2000); 
+
+           
+            WebElement historyTitle = driver.findElement(By.id("History"));
+            System.out.println("Section Title: " + historyTitle.getText());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+           
+            driver.quit();
+        }
+    }
+}
