@@ -1,0 +1,36 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class ChromeAutomation {
+
+    public static void main(String[] args) {
+       
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");  
+
+       
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized"); 
+
+       
+        WebDriver driver = new ChromeDriver(options);
+
+        try {
+           
+            driver.get("https://www.demoblaze.com/");
+
+           
+            String pageTitle = driver.getTitle();
+
+           
+            if ("STORE".equals(pageTitle)) {
+                System.out.println("Page landed on correct website");
+            } else {
+                System.out.println("Page not landed on correct website");
+            }
+        } finally {
+           
+            driver.quit();
+        }
+    }
+}
